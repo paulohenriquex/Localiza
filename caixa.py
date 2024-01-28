@@ -101,4 +101,5 @@ def relatorioPagamentoDia(connection, cursor, lc):
 
     if not caixas:
         print("Nenhum pagamento realizado hoje.")
+        print("Teste")
         return
