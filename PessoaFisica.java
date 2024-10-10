@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class PessoaFisica extends Cliente {
+public class PessoaFisica extends Clientes {
 
     private String cpf;
     private Date dataDeNascimento;
