@@ -1,14 +1,12 @@
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.annotation.processing.Generated;
-
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class GerenciarClientes {
-    public static void gerenciarClientes(Scanner sc, ArrayList<Clientes> clientes) {
+    public void gerenciarClientes(Scanner sc, ArrayList<Clientes> clientes) {
 
         int opcao;
 
@@ -26,6 +24,8 @@ public class GerenciarClientes {
                 cadastrarClientes(sc, clientes);
             } else if (opcao == 2) {
                 mostrarClientes(sc, clientes);
+            }else if(opcao == 3){
+                alterarCliente(sc,clientes);
             }
 
         } while (opcao != 0);
@@ -50,7 +50,6 @@ public class GerenciarClientes {
 
             System.out.println("Digite o número da casa: ");
             int numero = sc.nextInt();
-
             sc.nextLine();
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -90,5 +89,54 @@ public class GerenciarClientes {
                 System.out.println("Data de nascimento: " + pessoaFisica.getDataDeNascimento());
             }
         }
+        
+        System.out.println("\n#########################################################");
+    }
+
+    public static void alterarCliente(Scanner sc, ArrayList<Clientes>clientes){
+        
+        System.out.println("Digite o nome do cliente que deseja alterar: ");
+        String buscarNome = sc.nextLine();
+
+        for(Clientes cli: clientes){
+            if(cli instanceof PessoaFisica){
+                PessoaFisica pessoaFisica = (PessoaFisica)cli;
+                if(pessoaFisica.getNome().equals(buscarNome)){
+                    System.out.println("Cliente encontrado com sucesso "+ pessoaFisica.getNome());
+
+                    System.out.println("Digite o novo nome: ");
+                    String novoNome = sc.nextLine();
+
+                    System.out.println("Digite o novo CPF: ");
+                    String novoCPF = sc.nextLine();
+
+                    System.out.println("Digite o novo nome da rua: ");
+                    String rua = sc.nextLine();
+
+                    System.out.println("Digite o novo nome da cidade: ");
+                    String novoNomeCidade = sc.nextLine();
+
+                    System.out.println("Digite o novo numero: ");
+                    int novoNumero = sc.nextInt();
+                    sc.nextLine();
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    System.out.println("Digite a nova data de nascimento: ");
+                    String dataNas = sc.nextLine();
+                    try{
+                        LocalDate dataDeNascimento = LocalDate.parse(dataNas,formatter);
+                        LocalDate dataAtual = LocalDate.now();
+                        int verificarIdade = Period.between(dataDeNascimento, dataAtual).getYears();
+                        if(verificarIdade>=18){
+                            System.out.println("Maior de 18");
+                        }
+                    }catch(Exception e){
+                        System.out.println("Falha ao digitar a data."+e);
+                    }
+
+                }
+            }
+        }
+
     }
 }
