@@ -1,29 +1,31 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PessoaFisica extends Clientes {
 
     private String cpf;
-    private Date dataDeNascimento;
+    private LocalDate dataDeNascimento;
 
-    public PessoaFisica(String cpf, Date dataDeNascimento, String nome, String rua, String cidade, int numero) {
+
+    
+    public PessoaFisica(String cpf, LocalDate dataDeNascimento, String nome, String rua, String cidade, int numero) {
         super(nome, rua, cidade, numero);
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+            this.cpf = cpf;       
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setDataDeNascimento(Date dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
-    public Date getDataDeNascimento(){
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 }
