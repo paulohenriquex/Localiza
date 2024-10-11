@@ -1,4 +1,3 @@
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -102,6 +101,7 @@ public class GerenciarClientes {
             if(cli instanceof PessoaFisica){
                 PessoaFisica pessoaFisica = (PessoaFisica)cli;
                 if(pessoaFisica.getNome().equals(buscarNome)){
+
                     System.out.println("Cliente encontrado com sucesso "+ pessoaFisica.getNome());
 
                     System.out.println("Digite o novo nome: ");
@@ -110,11 +110,11 @@ public class GerenciarClientes {
                     System.out.println("Digite o novo CPF: ");
                     String novoCPF = sc.nextLine();
 
-                    System.out.println("Digite o novo nome da rua: ");
-                    String rua = sc.nextLine();
-
                     System.out.println("Digite o novo nome da cidade: ");
                     String novoNomeCidade = sc.nextLine();
+                    
+                    System.out.println("Digite o novo nome da rua: ");
+                    String rua = sc.nextLine();
 
                     System.out.println("Digite o novo numero: ");
                     int novoNumero = sc.nextInt();
@@ -123,15 +123,26 @@ public class GerenciarClientes {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                     System.out.println("Digite a nova data de nascimento: ");
                     String dataNas = sc.nextLine();
+
                     try{
+                        System.out.println("Entrou no try");
                         LocalDate dataDeNascimento = LocalDate.parse(dataNas,formatter);
+                        System.out.println("1");
                         LocalDate dataAtual = LocalDate.now();
+                        System.out.println("2");
                         int verificarIdade = Period.between(dataDeNascimento, dataAtual).getYears();
-                        if(verificarIdade>=18){
-                            System.out.println("Maior de 18");
+                        System.out.println("3");
+                        System.out.println("Sua idade é: " + verificarIdade);
+                        if(verificarIdade>=18 && verificarIdade <=115){
+                            pessoaFisica.setNome(novoNome);
+                            pessoaFisica.setCpf(novoCPF);
+                            pessoaFisica.setCidade(novoNomeCidade);
+                            pessoaFisica.setRua(rua);
+                            pessoaFisica.setNumero(novoNumero);
+                            pessoaFisica.setDataDeNascimento(dataDeNascimento);
                         }
                     }catch(Exception e){
-                        System.out.println("Falha ao digitar a data."+e);
+                        System.out.println("Falha ao digitar a data. " + e.getMessage());
                     }
 
                 }
