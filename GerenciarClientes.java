@@ -160,59 +160,98 @@ public class GerenciarClientes {
 
     public static void alterarCliente(Scanner sc, ArrayList<Clientes> clientes) {
 
-        System.out.println("Digite o nome do cliente que deseja alterar: ");
-        String buscarNome = sc.nextLine();
+        System.out.println("Digite o CPF/CNPJ do cliente que deseja alterar: ");
+        String buscarCpfCnpj = sc.nextLine();
 
-        for (Clientes cli : clientes) {
-            if (cli instanceof PessoaFisica) {
-                PessoaFisica pessoaFisica = (PessoaFisica) cli;
-                if (pessoaFisica.getNome().equals(buscarNome)) {
+        if (buscarCpfCnpj.length() == 11) {
 
-                    System.out.println("Cliente encontrado com sucesso " + pessoaFisica.getNome());
+            for (Clientes cli : clientes) {
+                if (cli instanceof PessoaFisica) {
+                    PessoaFisica pessoaFisica = (PessoaFisica) cli;
+                    if (pessoaFisica.getCpf().equals(buscarCpfCnpj)) {
 
-                    System.out.println("Digite o novo nome: ");
-                    String novoNome = sc.nextLine();
+                        System.out.println("Cliente encontrado com sucesso " + pessoaFisica.getNome());
 
-                    System.out.println("Digite o novo CPF: ");
-                    String novoCPF = sc.nextLine();
+                        System.out.println("Digite o novo nome: ");
+                        String novoNome = sc.nextLine();
 
-                    System.out.println("Digite o novo nome da cidade: ");
-                    String novoNomeCidade = sc.nextLine();
+                        System.out.println("Digite o novo CPF: ");
+                        String novoCPF = sc.nextLine();
 
-                    System.out.println("Digite o novo nome da rua: ");
-                    String rua = sc.nextLine();
+                        System.out.println("Digite o novo nome da cidade: ");
+                        String novoNomeCidade = sc.nextLine();
 
-                    System.out.println("Digite o novo numero: ");
-                    int novoNumero = sc.nextInt();
-                    sc.nextLine();
+                        System.out.println("Digite o novo nome da rua: ");
+                        String rua = sc.nextLine();
 
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                    System.out.println("Digite a nova data de nascimento: ");
-                    String dataNas = sc.nextLine();
+                        System.out.println("Digite o novo numero: ");
+                        int novoNumero = sc.nextInt();
+                        sc.nextLine();
 
-                    try {
-                        System.out.println("Entrou no try");
-                        LocalDate dataDeNascimento = LocalDate.parse(dataNas, formatter);
-                        System.out.println("1");
-                        LocalDate dataAtual = LocalDate.now();
-                        System.out.println("2");
-                        int verificarIdade = Period.between(dataDeNascimento, dataAtual).getYears();
-                        System.out.println("3");
-                        System.out.println("Sua idade é: " + verificarIdade);
-                        if (verificarIdade >= 18 && verificarIdade <= 115) {
-                            pessoaFisica.setNome(novoNome);
-                            pessoaFisica.setCpf(novoCPF);
-                            pessoaFisica.setCidade(novoNomeCidade);
-                            pessoaFisica.setRua(rua);
-                            pessoaFisica.setNumero(novoNumero);
-                            pessoaFisica.setDataDeNascimento(dataDeNascimento);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                        System.out.println("Digite a nova data de nascimento: ");
+                        String dataNas = sc.nextLine();
+
+                        try {
+                            System.out.println("Entrou no try");
+                            LocalDate dataDeNascimento = LocalDate.parse(dataNas, formatter);
+                            System.out.println("1");
+                            LocalDate dataAtual = LocalDate.now();
+                            System.out.println("2");
+                            int verificarIdade = Period.between(dataDeNascimento, dataAtual).getYears();
+                            System.out.println("3");
+                            System.out.println("Sua idade é: " + verificarIdade);
+                            if (verificarIdade >= 18 && verificarIdade <= 115) {
+                                pessoaFisica.setNome(novoNome);
+                                pessoaFisica.setCpf(novoCPF);
+                                pessoaFisica.setCidade(novoNomeCidade);
+                                pessoaFisica.setRua(rua);
+                                pessoaFisica.setNumero(novoNumero);
+                                pessoaFisica.setDataDeNascimento(dataDeNascimento);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Falha ao digitar a data. " + e.getMessage());
                         }
-                    } catch (Exception e) {
-                        System.out.println("Falha ao digitar a data. " + e.getMessage());
+
                     }
 
                 }
             }
+        } else if (buscarCpfCnpj.length() == 15) {
+
+            for (Clientes cli : clientes) {
+                if (cli instanceof PessoaJuridica) {
+                    PessoaJuridica pessoaJuridica = (PessoaJuridica) cli;
+                    if (pessoaJuridica.getCnpj().equals(buscarCpfCnpj)) {
+
+                        System.out.println("Cliente encontrado com sucesso " + pessoaJuridica.getNome());
+
+                        System.out.println("Digite o novo nome: ");
+                        String novoNome = sc.nextLine();
+
+                        System.out.println("Digite o novo CNPJ: ");
+                        String novoCNPJ = sc.nextLine();
+
+                        System.out.println("Digite o novo nome da cidade: ");
+                        String novoNomeCidade = sc.nextLine();
+
+                        System.out.println("Digite o novo nome da rua: ");
+                        String rua = sc.nextLine();
+
+                        System.out.println("Digite o novo numero: ");
+                        int novoNumero = sc.nextInt();
+                        sc.nextLine();
+
+                        pessoaJuridica.setNome(novoNome);
+                        pessoaJuridica.setCnpj(novoCNPJ);
+                        pessoaJuridica.setCidade(novoNomeCidade);
+                        pessoaJuridica.setRua(rua);
+                        pessoaJuridica.setNumero(novoNumero);
+                    }
+
+                }
+            }
+
         }
 
     }
