@@ -37,12 +37,13 @@ public class GerenciarVeiculos {
         } while (opcao != 0);
     }
 
-    public static void cadastrarVeiculo(Scanner sc, ArrayList<Veiculos> veiculos) {
-
+    public static void cadastrarVeiculo(
+        Scanner sc,
+        ArrayList<Veiculos> veiculos
+    ) {
         int op;
 
         do {
-
             System.out.println("1 - Cadastrar carro.");
             System.out.println("2 - Cadastrar caminhão.");
             System.out.println("0 - Sair");
@@ -54,7 +55,6 @@ public class GerenciarVeiculos {
 
             sc.nextLine();
             if (op == 1) {
-
                 System.out.println("Digite a placa do carro: ");
                 String placa = sc.nextLine();
 
@@ -75,22 +75,85 @@ public class GerenciarVeiculos {
                 int quantiaddeDePortas = sc.nextInt();
                 sc.nextLine();
 
-                Veiculos veiculo = new Carros(placa, marca, modelo, cor, anoDeFabricacao, quantiaddeDePortas);
+                Veiculos veiculo = new Carro(
+                    placa,
+                    marca,
+                    modelo,
+                    cor,
+                    anoDeFabricacao,
+                    quantiaddeDePortas
+                );
                 veiculos.add(veiculo);
+            } else if (op == 2) {
+                System.out.println("Digite a placa do carro: ");
+                String placa = sc.nextLine();
+
+                System.out.println("Digite a marca do carro: ");
+                String marca = sc.nextLine();
+
+                System.out.println("Digite o modelo do carro: ");
+                String modelo = sc.nextLine();
+
+                System.out.println("Digite a cor do carro: ");
+                String cor = sc.nextLine();
+
+                System.out.println("Digite o ano de fabricação: ");
+                int anoDeFabricacao = sc.nextInt();
+                sc.nextLine();
+
+                System.out.println("Digite de eixos: ");
+                int quantidadeDeEixos = sc.nextInt();
+                sc.nextLine();
+
+                Caminhao caminhao = new Caminhao(
+                    placa,
+                    marca,
+                    modelo,
+                    cor,
+                    anoDeFabricacao,
+                    quantidadeDeEixos
+                );
             }
         } while (op != 0);
     }
 
-    public static void mostrarVeiculos(Scanner sc, ArrayList<Veiculos> veiculos) {
-        for (Veiculos vei : veiculos) {
-            if (vei instanceof Carros) {
-                Carros carros = (Carros) vei;
-                System.out.println("Placa: " + carros.getPlaca());
-                System.out.println("Marca: " + carros.getMarca());
-                System.out.println("Modelo: " + carros.getModelo());
-                System.out.println("Cor: " + carros.getCor());
-                System.out.println("Ano: " + carros.getAnoFabricacao());
-                System.out.println("Quantidade Portas: " + carros.getQuantidadeDePortas());
+    public static void mostrarVeiculos(
+        Scanner sc,
+        ArrayList<Veiculos> veiculos
+    ) {
+        System.out.println("Veículos cadastrados: ");
+        System.out.println("1 - Carros");
+        System.out.println("2 - Caminhões");
+        System.out.println("0 - Sair");
+        int op = sc.nextInt();
+        sc.nextLine();
+        if (op == 1) {
+            for (Veiculos vei : veiculos) {
+                if (vei instanceof Carro) {
+                    Carro carro = (Carro) vei;
+                    System.out.println("Placa: " + carro.getPlaca());
+                    System.out.println("Marca: " + carro.getMarca());
+                    System.out.println("Modelo: " + carro.getModelo());
+                    System.out.println("Cor: " + carro.getCor());
+                    System.out.println("Ano: " + carro.getAnoFabricacao());
+                    System.out.println(
+                        "Quantidade Portas: " + carro.getQuantidadeDePortas()
+                    );
+                }
+            }
+        } else if (op == 2) {
+            for (Veiculos vei : veiculos) {
+                if (vei instanceof Caminhao) {
+                    Caminhao caminhao = (Caminhao) vei;
+                    System.out.println("Placa: " + caminhao.getPlaca());
+                    System.out.println("Marca: " + caminhao.getMarca());
+                    System.out.println("Modelo: " + caminhao.getModelo());
+                    System.out.println("Cor: " + caminhao.getCor());
+                    System.out.println("Ano: " + caminhao.getAnoFabricacao());
+                    System.out.println(
+                        "Quantidade Portas: " + caminhao.getQuantidadeDeEixos()
+                    );
+                }
             }
         }
     }

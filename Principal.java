@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Principal {
 
     public static void main(String[] args) {
-
         int opcao;
         Scanner sc = new Scanner(System.in);
         ArrayList<Clientes> clientes = new ArrayList<>();
@@ -13,7 +12,6 @@ public class Principal {
         GerenciarVeiculos gerVei = new GerenciarVeiculos();
 
         do {
-
             System.out.println("1 - Gerenciar clientes.");
             System.out.println("2 - Gerenciar veiculos.");
             System.out.println("0 - Sair.");
@@ -29,8 +27,6 @@ public class Principal {
                 default:
                     break;
             }
-
         } while (opcao != 0);
     }
-
 }
