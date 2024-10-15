@@ -150,9 +150,7 @@ public class GerenciarClientes {
                 System.out.println("Numero: " + pessoaJuridica.getNumero());
 
             }
-
             System.out.println("\n#########################################################");
-
         } else {
             System.out.println("Opção inválida");
         }
@@ -254,5 +252,9 @@ public class GerenciarClientes {
 
         }
 
+    }
+
+    public static void excluirCliente(){
+        
     }
 }
